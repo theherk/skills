@@ -56,6 +56,7 @@ refactor(api): Simplify error handling across endpoints
 2. Examine the staged changes (git) or current revision diff (jj) to understand what changed
 3. Generate a commit message following the rules above
 4. Create the commit using the generated message
+5. If using jujutsu, add a new revision to work on so we don't modify the same commit.
 
 ## Important
 
