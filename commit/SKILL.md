@@ -1,25 +1,35 @@
 ---
 name: commit
-description: Generate and create conventional commit messages with proper capitalization and formatting
+description: Generate and create commit messages with proper capitalization and formatting
 ---
 
-# Conventional Commit Messages
+# Commit Messages
 
 ## Format
 
-Generate commit messages following Conventional Commits v1.0.0 with this capitalization:
+Check the current branch name (git) or bookmarks on the current revision (jj) for a Jira ticket number matching `[a-zA-Z]{3,4}-[0-9]{3,}`.
+
+### With Jira ticket
+
+Use Conventional Commits v1.0.0 with the ticket as the scope:
 
 ```
-type(scope): Capitalize the summary
+type(PROJ-1234): Capitalize the summary
 ```
 
-The summary line must be imperative, present tense, and must not end with a period. The first word after the colon and space must be capitalized.
+### Without Jira ticket
+
+Use a clear, imperative commit message without conventional commit prefixes:
+
+```
+Capitalize the summary
+```
 
 ## Rules
 
+- The summary line must be imperative, present tense, and must not end with a period
+- The first word of the summary must be capitalized
 - All lines must be a maximum of 72 characters long
-- The summary line must always contain a scope
-- If the current branch name contains a Jira ticket number matching `[a-zA-Z]{3,4}-[0-9]{3,}`, use the ticket as the scope
 - Return only the commit message text with no code fences, commentary, or extra markup
 
 ## Body
@@ -34,16 +44,24 @@ Separate the summary from the body with a blank line.
 
 ## Examples
 
+### With Jira ticket (branch: feature/PROJ-1234-auth-refresh)
+
 ```
-feat(auth): Add JWT token refresh mechanism
+feat(PROJ-1234): Add JWT token refresh mechanism
 ```
 
 ```
 fix(PROJ-1234): Resolve null pointer in user lookup
 ```
 
+### Without Jira ticket
+
 ```
-refactor(api): Simplify error handling across endpoints
+Add JWT token refresh mechanism
+```
+
+```
+Simplify error handling across endpoints
 
 - Extract common error response builder into shared utility.
 - Remove redundant try-catch blocks in individual handlers.
@@ -54,9 +72,10 @@ refactor(api): Simplify error handling across endpoints
 
 1. Check for a `.jj` directory; if present, use jujutsu commands, otherwise use git
 2. Examine the staged changes (git) or current revision diff (jj) to understand what changed
-3. Generate a commit message following the rules above
-4. Create the commit using the generated message
-5. If using jujutsu, add a new revision to work on so we don't modify the same commit.
+3. Check the branch name (git) or bookmarks (jj) for a Jira ticket number
+4. Generate a commit message following the rules above
+5. Create the commit using the generated message
+6. If using jujutsu, add a new revision to work on so we don't modify the same commit.
 
 ## Important
 
