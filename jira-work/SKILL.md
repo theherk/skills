@@ -136,3 +136,9 @@ Append `--json` for JSON or `--csv` for CSV output to any search or list command
 5. When transitioning items, use `--yes` flag to skip confirmation prompts
 6. When blocking items, transition to "Blocked/Waiting" AND create a "Blocks" link to the blocking issue
 7. When stepping items through deployment pipeline, transition through required intermediate states
+
+## Invocation
+
+This skill is designed to be used as an OpenCode subagent (`jira-work`). When invoked, execute the
+requested Jira operation(s) and return a concise summary of results or actions taken. Do not continue
+the conversation — complete the task and report back.
