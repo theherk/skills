@@ -123,6 +123,29 @@ acli jira workitem link list --key <ISSUE-KEY>
 acli jira workitem link type
 ```
 
+### Move work item to a sprint
+
+**Limitation:** `acli` does not support moving work items to sprints. There is no
+`--sprint` flag on `create` or `edit`, and no `sprint move-workitem` subcommand.
+
+**Workaround:** Use the Atlassian MCP (`atlassian_editJiraIssue`) to set the sprint
+field. The sprint field is `customfield_10020` and takes a sprint ID.
+
+```
+atlassian_editJiraIssue(
+  cloudId: "dnb-asa.atlassian.net",
+  issueIdOrKey: "<ISSUE-KEY>",
+  fields: { "customfield_10020": {"id": <sprint-id>} }
+)
+```
+
+To find the active sprint ID, use `acli jira board list-sprints --id 91 --state active`.
+
+**Important:** Prefer `acli` for all standard operations (search, transitions,
+comments, links) to minimize context usage. Only fall back to the Atlassian MCP
+tools when `acli` cannot accomplish the task (e.g., sprint assignment, field
+updates on custom fields).
+
 ### Output formats
 
 Append `--json` for JSON or `--csv` for CSV output to any search or list command.
