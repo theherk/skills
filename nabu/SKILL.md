@@ -125,6 +125,35 @@ Add cross-references in the Related Notes section using Obsidian links:
 5. Perform the requested operation (read/create/update/link)
 6. Return concise confirmation of what was done
 
+## Obsidian CLI
+
+The `obsidian` CLI provides vault-aware operations. Use it for searching notes, reading content, and querying vault structure. Target a vault with `vault=<name>`.
+
+### Key commands for Nabu
+
+```sh
+# Search across a vault (text search, returns matching files with context)
+obsidian search query="<text>" vault=brain
+obsidian search query="<text>" vault=dnbrain path=nabu
+
+# Search with line context
+obsidian search:context query="<text>" vault=brain path=nabu
+
+# Read a note by path
+obsidian read vault=brain path="nabu/github.com/theherk/commons.md"
+
+# List files in the nabu folder
+obsidian files vault=brain folder=nabu
+
+# Get backlinks to a note
+obsidian backlinks vault=brain path="nabu/github.com/theherk/commons.md"
+
+# List tags
+obsidian tags vault=brain path="nabu/github.com/theherk/commons.md"
+```
+
+Prefer `obsidian search` over grep when looking for notes or content across a vault. It uses Obsidian's index and respects vault structure.
+
 ## Guidelines
 
 - Keep notes brief and structured. This content will be fed into context.
