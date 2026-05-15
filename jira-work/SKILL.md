@@ -135,7 +135,7 @@ field. The sprint field is `customfield_10020` and takes a sprint ID.
 atlassian_editJiraIssue(
   cloudId: "dnb-asa.atlassian.net",
   issueIdOrKey: "<ISSUE-KEY>",
-  fields: { "customfield_10020": {"id": <sprint-id>} }
+  fields: { "customfield_10020": <sprint-id> }
 )
 ```
 
