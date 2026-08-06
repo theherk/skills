@@ -74,8 +74,9 @@ Simplify error handling across endpoints
 2. Examine the staged changes (git) or current revision diff (jj) to understand what changed
 3. Check the branch name (git) or bookmarks (jj) for a Jira ticket number
 4. Generate a commit message following the rules above
-5. Create the commit using the generated message
-6. If using jujutsu, add a new revision to work on so we don't modify the same commit.
+5. Output the exact commit message you intend to use as a quoted block
+6. Create the commit using the generated message
+7. If using jujutsu, add a new revision to work on so we don't modify the same commit.
 
 ## Important
 
