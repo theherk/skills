@@ -19,21 +19,22 @@ Run the setup script to install these skills:
 ```
 
 This script will:
-1. Backup your existing `~/.claude/skills` directory to `~/.claude/skills_backup_<timestamp>`
-2. Create a symlink from this repository to `~/.claude/skills`
-3. Make all skills immediately available in Claude Code sessions
+1. Remove the legacy `~/.claude/skills` symlink if it points at this repo (no back-compat)
+2. Backup any pre-existing, non-symlink `~/.agents/skills` directory to `~/.agents/skills_backup_<timestamp>`
+3. Create a symlink from this repository to `~/.agents/skills`
+4. Make all skills immediately available in any Agent-Skills-compatible harness (opencode, goose, Crush, etc.)
 
 The script is idempotent and safe to run multiple times.
 
 ## Using Skills
 
-Once installed, skills are automatically available in Claude Code. Invoke them using the `/` command:
+Once installed, skills are automatically available. Invoke them using the `/` command (opencode) or natural language / `/skills <name>` (goose):
 
 ```
 /improve-docs README.md
 ```
 
-Claude Code will also proactively suggest relevant skills based on your requests.
+Agents will also proactively suggest relevant skills based on your requests.
 
 ## Creating New Skills
 
