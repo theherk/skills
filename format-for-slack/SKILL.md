@@ -9,6 +9,8 @@ Slack does not render standard Markdown. It uses "mrkdwn", a different syntax. T
 
 Trigger: user says something like "format this for Slack" or "output this for Slack" about a message already composed or edited in the conversation.
 
+Note: the same rules are implemented programmatically in the user's neovim config (`lua/module/slack.lua`, bound to `<leader>sy` in normal and visual mode). If the user is editing in neovim, suggest that instead of an AI round trip; keep the two in sync when rules change.
+
 ## Conversion rules
 
 Apply every rule that matches content in the source.
@@ -18,7 +20,7 @@ Apply every rule that matches content in the source.
 | Markdown                                 | Slack mrkdwn       |
 | ---------------------------------------- | ------------------ |
 | `**bold**`                               | `*bold*`           |
-| `__italic__`                             | `_italic_`         |
+| `__bold__`                               | `*bold*`           |
 | `*italic*` / `_italic_` (already single) | `_italic_`         |
 | `~~strikethrough~~`                      | `~strikethrough~`  |
 
