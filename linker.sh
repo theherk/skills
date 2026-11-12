@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Symlink each skill in this repo into ~/.agents/skills. Create-only: existing links of the
-# same name are overwritten (last wins); nothing is pruned, so other skill repos can coexist.
+# same name are overwritten (last wins); real directories are never replaced (skipped with a
+# warning); nothing is pruned, so other skill repos can coexist.
 
 set -e
 
@@ -19,5 +20,11 @@ mkdir -p "$SKILLS_DIR"
 
 for skill_file in "$REPO_DIR"/*/SKILL.md; do
 	skill_dir="$(dirname "$skill_file")"
-	ln -sfn "$skill_dir" "$SKILLS_DIR/$(basename "$skill_dir")"
+	name="$(basename "$skill_dir")"
+	target="$SKILLS_DIR/$name"
+	if [ -e "$target" ] && [ ! -L "$target" ]; then
+		echo "skipped $name: $target exists and is not a symlink" >&2
+		continue
+	fi
+	ln -sfn "$skill_dir" "$target"
 done

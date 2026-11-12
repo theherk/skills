@@ -24,7 +24,7 @@ This script will:
 3. Symlink each skill in this repository into `~/.agents/skills/<skill>`
 4. Make all skills immediately available in any Agent-Skills-compatible harness (opencode, goose, Crush, etc.)
 
-It only creates links (same-named links are overwritten, last wins) and never prunes, so other skill repositories can be linked into the same directory. It is safe to run multiple times.
+It only creates links (same-named links are overwritten, last wins; a real directory of the same name is skipped with a warning) and never prunes, so other skill repositories can be linked into the same directory. It is safe to run multiple times.
 
 ## Using Skills
 
