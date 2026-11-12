@@ -15,7 +15,8 @@ Skills are reusable capabilities that Claude Code can invoke during sessions to 
 Run the setup script to install these skills:
 
 ```bash
-./linker.sh
+./linker.sh                    # every skill
+./linker.sh commit review      # only the named skills
 ```
 
 This script will:
