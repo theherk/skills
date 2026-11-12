@@ -15,16 +15,16 @@ Skills are reusable capabilities that Claude Code can invoke during sessions to 
 Run the setup script to install these skills:
 
 ```bash
-./link_skills.sh
+./linker.sh
 ```
 
 This script will:
 1. Remove the legacy `~/.claude/skills` symlink if it points at this repo (no back-compat)
-2. Backup any pre-existing, non-symlink `~/.agents/skills` directory to `~/.agents/skills_backup_<timestamp>`
-3. Create a symlink from this repository to `~/.agents/skills`
+2. Replace a whole-directory `~/.agents/skills` symlink (the old layout) with a real directory
+3. Symlink each skill in this repository into `~/.agents/skills/<skill>`
 4. Make all skills immediately available in any Agent-Skills-compatible harness (opencode, goose, Crush, etc.)
 
-The script is idempotent and safe to run multiple times.
+It only creates links (same-named links are overwritten, last wins) and never prunes, so other skill repositories can be linked into the same directory. It is safe to run multiple times.
 
 ## Using Skills
 
