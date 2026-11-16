@@ -39,7 +39,24 @@ This opens the daily note and applies the correct journal template if the file d
 
 If neovim/Obsidian plugin is not available, create the file manually at `~/vaults/brain/journal/YYYY-MM-DD.md`. Check existing dailies in the vault to confirm the template format.
 
-## Daily Note Structure
+## Note Structure
+
+### General Note Structure
+
+Aside from daily notes, most note have very basic structure. Frontmatter should have tags, but the total set of usable tags should be kept minimal. Use the `obsidian tags` command for the vault to find relevant tags. The first text following the frontmatter should a blank line, then h1 of the note name. For example, a note file `Interesting Note.md` should start:
+
+```markdown
+---
+tags:
+  - example
+---
+
+# Interesting Note
+```
+
+From there, no further h1; only h2 and below. Link to other notes as much as reasonable, and always use markdown links in lieu of wiki-style.
+
+### Daily Note Structure
 
 Daily notes use the following sections in order:
 

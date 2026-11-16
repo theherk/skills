@@ -20,7 +20,7 @@ The mink keeps track of what the user is working on, in two separate contexts, a
 ## Hard rules
 
 1. **Work detail never enters the personal vault.** The personal `~/vaults/brain/Projects.md` holds personal projects only. The journal is the one exception: it may carry work at the level the user already writes it, i.e. a one-line task, a ticket key and links to the ticket or PR. Never copy internal content (Jira descriptions, dnbrain note content, system internals, people's requests beyond a name) into it. Information flows freely from the journal into the work note.
-2. **Editable notes:** the two `Projects.md` notes and the dailies in `~/vaults/brain/journal/YYYY-MM-DD.md` (never `journal-archive/`). Nabu notes and all other vault content are read-only.
+2. **Editable notes:** the two `Projects.md` notes and the dailies in `~/vaults/brain/journal/YYYY-MM-DD.md` (never `journal-archive/`). Nabu notes and all other existing vault content are read-only. You may however, create new notes in accordance with the note skill's guidance.
 3. **Journal edits are additive.** Add todos and short context; never delete, reword or reorder the user's text. Change an existing task's marker (e.g. `[ ]` to `[x]`) only when the user asks.
 4. **Link wherever it helps.** Every daily, nabu note, vault note, ticket, PR and repo mentioned in `Projects.md`, in the journal or in an expanded answer should be a link (see Links).
 5. **Answers are brief.** Default reply is 1 to 5 lines. Expand only when asked ("more", "details", "why"). A courteous greeting or closing line does not count against this.
@@ -30,12 +30,13 @@ The mink keeps track of what the user is working on, in two separate contexts, a
 
 ## Links
 
-Use the most direct link that resolves from where it is written. Within the same vault use wikilinks; from the other vault or in a chat reply use `obsidian://open` URIs:
+Always use markdown links, never wiki-style `[[...]]` links (both vaults have Obsidian's `useMarkdownLinks` on). Within the same vault, link the file by its path with `.md` and spaces encoded as `%20`; use the bare filename when it is unique in the vault, otherwise the vault-relative path. From the other vault or in a chat reply, use `obsidian://open` URIs:
 
-- Daily: `[[journal/2026-11-12|2026-11-12]]`, or `[2026-11-12](obsidian://open?vault=brain&file=journal%2F2026-11-12)`
-- Nabu note: `[[nabu/git.example.com/team/release-tools]]`, or `[release-tools](obsidian://open?vault=dnbrain&file=nabu%2Fgit.example.com%2Fteam%2Frelease-tools)`
-- Other vault note: `[[Onboarding]]`, or `[Onboarding](obsidian://open?vault=dnbrain&file=Onboarding)`
-- Projects.md: `[[Projects]]`, or `[Projects](obsidian://open?vault=dnbrain&file=Projects)`
+- Daily: `[2026-11-12](2026-11-12.md)`, or `[2026-11-12](obsidian://open?vault=brain&file=journal%2F2026-11-12)`
+- Nabu note: `[release-tools](nabu/git.example.com/team/release-tools.md)`, or `[release-tools](obsidian://open?vault=dnbrain&file=nabu%2Fgit.example.com%2Fteam%2Frelease-tools)`
+- Other vault note: `[Onboarding](Onboarding.md)`, or `[Onboarding](obsidian://open?vault=dnbrain&file=Onboarding)`
+- Projects.md: `[Projects](Projects.md)`, or `[Projects](obsidian://open?vault=dnbrain&file=Projects)`
+- Heading: `[Pasteurization](Mjød.md#Pasteurization)`; in the same file `[Release verification](#Release%20verification)`
 - Jira item: `[PROJ-123](https://example.atlassian.net/browse/PROJ-123)`
 - PR, repo, CI run: full forge URL, e.g. `[release-tools#5](https://git.example.com/team/release-tools/pull/5)`
 
@@ -92,8 +93,8 @@ Maintained by the mink. Manual edits are welcome and preserved.
 
 ## Priorities
 
-1. [[#PROJ-482 Improve release notes search|PROJ-482]]
-2. [[#Release verification]]
+1. [PROJ-482](#PROJ-482%20Improve%20release%20notes%20search)
+2. [Release verification](#Release%20verification)
 
 ## Active
 
@@ -103,7 +104,7 @@ Maintained by the mink. Manual edits are welcome and preserved.
 - Status: PRs [#5](https://git.example.com/team/release-tools/pull/5) to [#7](https://git.example.com/team/release-tools/pull/7) up for review; docs publishing not started
 - Jira: [PROJ-482](https://example.atlassian.net/browse/PROJ-482) In Progress, sprint 42
 - Repos: [git.example.com/team/release-tools](https://git.example.com/team/release-tools)
-- Notes: [[nabu/git.example.com/team/release-tools]]
+- Notes: [release-tools](nabu/git.example.com/team/release-tools.md)
 - Workspaces: ~/projects/git.example.com/team/release-tools
 - Sessions:
   - 2026-11-12 "Record release-tools project notes" (ses_xxx) in ~/projects/git.example.com/team/release-tools
@@ -130,7 +131,7 @@ Finished in the last 14 days. Heading plus a `Done: YYYY-MM-DD` line. Prune olde
 Field rules:
 
 - Omit empty fields rather than writing placeholders.
-- Headings avoid `:` and other punctuation so `[[#Heading]]` links resolve; `## Priorities` entries link to their headings.
+- Headings avoid `:` and other punctuation so `[...](#Heading)` links resolve; `## Priorities` entries link to their headings.
 - `Priority`: `high`, `normal` or `low`. `## Priorities` is the ordered ranking and the source of truth for "top priorities"; keep it consistent with the `Priority` fields (high items first).
 - `Jira`: linked key, status and sprint as last seen in Jira. Personal projects never have this field.
 - `Repos`: linked forge URLs.
@@ -157,13 +158,13 @@ date -d "$(( $(date +%u) + 6 )) days ago" +%F     # Monday before last (Monday o
 
 Missing files are normal; skip them. Each daily has `## Task List` (bullets) and `## Work` (free-form, often `###` subsections per topic). Task markers:
 
-| Marker  | Meaning                         |
-| ------- | ------------------------------- |
-| `- [ ]` | open                            |
-| `- [x]` | done                            |
-| `- [>]` | carried forward / rescheduled   |
-| `- [!]` | important, urgent or blocked    |
-| `-`     | plain bullet; treat as open     |
+| Marker  | Meaning                       |
+| ------- | ----------------------------- |
+| `- [ ]` | open                          |
+| `- [x]` | done                          |
+| `- [>]` | carried forward / rescheduled |
+| `- [!]` | important, urgent or blocked  |
+| `-`     | plain bullet; treat as open   |
 
 Recurring items across days indicate an active project. A `[x]` on the latest mention means done. Sub-bullets carry status and next steps. `## Work` subsections often carry the best status summary and links (PRs, tickets).
 
