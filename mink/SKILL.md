@@ -362,13 +362,17 @@ date -d "$(( $(date +%u) + 6 )) days ago" +%F     # Monday before last (Monday o
 
 Missing files are normal; skip them. Each daily has `## Task List` (bullets) and `## Work` (free-form, often `###` subsections per topic). Task markers:
 
-| Marker  | Meaning                       |
-| ------- | ----------------------------- |
-| `- [ ]` | open                          |
-| `- [x]` | done                          |
-| `- [>]` | carried forward / rescheduled |
-| `- [!]` | important, urgent or blocked  |
-| `-`     | plain bullet; treat as open   |
+| Marker  | Meaning                                  |
+| ------- | ---------------------------------------- |
+| `- [ ]` | open                                     |
+| `- [/]` | in progress; started, not finished       |
+| `- [x]` | done                                     |
+| `- [>]` | forwarded; carried forward / rescheduled |
+| `- [~]` | cancelled; will not be done (not `[-]`)  |
+| `- [!]` | important or urgent                      |
+| `-`     | plain bullet; treat as open              |
+
+These are the markers the user's editor renders (nvim `render-markdown`, `.config/nvim/plugin/6-code.lua`). The journal does have an in-progress marker, `[/]`. When the user says work on a todo has started, use `[/]`; do not leave it `[ ]` with the state in a sub-bullet, and do not ask which marker to use. Blocked has no marker of its own; say so in a sub-bullet. Changing a marker still requires the user to ask (Hard rule 4).
 
 People named in a daily are classified per Classifying context; work people are recorded only in the work cabinet, with the daily linked in their `Seen in` line. Do not turn names in the user's own text into links (Hard rule 4); link people only in lines the mink writes. Recurring items across days indicate an active project. A `[x]` on the latest mention means done. Sub-bullets carry status and next steps. `## Work` subsections often carry the best status summary and links (PRs, tickets).
 
